@@ -1,4 +1,4 @@
-**Disclaimer**
+⚠️**Disclaimer**⚠️
 By downloading or using this macro, you agree to the following terms:
 
 **This software is provided "as is," without warranty of any kind.**
