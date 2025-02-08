@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScriptHooker Documentation</title>
+    <style>
+        /* General body and typography settings */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 30px;
+            background-color: #f9fafb;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 1.75em;
+        }
+
+        h3 {
+            font-size: 1.25em;
+            margin-top: 20px;
+        }
+
+        /* Styling for code and preformatted text */
+        code {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 1.1em;
+        }
+
+        pre {
+            background-color: #34495e;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Layout and container styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section ul {
+            list-style-type: square;
+            margin-left: 20px;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .section h3 {
+            margin-top: 30px;
+        }
+
+        /* Enhancing table-like structures */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        /* Button-like styles for links */
+        .button-link {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Styling for anchors within the page */
+        .toc {
+            margin-bottom: 30px;
+        }
+
+        .toc a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ScriptHooker Documentation</h1>
+        
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#scriptglobals">ScriptGlobals Class</a></li>
+                <li><a href="#scripthooker">ScriptHooker Class</a></li>
+                <li><a href="#example-usage">Example Usage</a></li>
+                <li><a href="#additional-examples">Additional Examples</a></li>
+                <li><a href="#logging">Logging</a></li>
+            </ul>
+        </div>
+
+        <div class="section" id="overview">
+            <h2>Overview</h2>
+            <p>The <code>ScriptHooker</code> class enables secure execution of C# scripts within a controlled environment. It is designed to help developers execute custom scripts while ensuring safety by preventing the use of potentially malicious URLs. The class provides functionality to create forms, log events, and manage presets, among other utilities.</p>
+        </div>
+
+        <div class="section" id="scriptglobals">
+            <h2>ScriptGlobals Class</h2>
+            <p>The <code>ScriptGlobals</code> class contains methods and properties that simplify common tasks in a script execution environment.</p>
+
+            <h3>Properties</h3>
+            <ul>
+                <li><code>AppName</code> - Returns the name of the application.</li>
+                <li><code>UserValue</code> - Stores a user-defined integer value.</li>
+            </ul>
+
+            <h3>Methods</h3>
+            <ul>
+                <li><code>ShowMessage(string message)</code> - Displays a message in the console.</li>
+                <li><code>ShowMessageBox(string message)</code> - Displays a message box with the given message.</li>
+                <li><code>CreateForm(string title)</code> - Creates a Windows form with the specified title.</li>
+                <li><code>IncrementValue(int increment)</code> - Increments the <code>UserValue</code> property by the given amount.</li>
+                <li><code>ShowForm(Form form)</code> - Displays the form if not already visible.</li>
+                <li><code>LogError(string message)</code> - Logs an error message.</li>
+                <li><code>LogWarning(string message)</code> - Logs a warning message.</li>
+                <li><code>LogMessage(string message)</code> - Logs a general message.</li>
+                <li><code>SafeFileDelete(string filePath)</code> - Deletes a file while ensuring it is not a system file.</li>
+                <li><code>SafeFileWrite(string filePath, string content)</code> - Safely writes content to a file.</li>
+                <li><code>SavePreset(string presetName, string presetJson, string type)</code> - Saves a preset to the specified directory.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="scripthooker">
+            <h2>ScriptHooker Class</h2>
+            <p>The <code>ScriptHooker</code> class is responsible for managing script execution, checking for malicious content, and logging. It also includes methods for script unloading and reloading.</p>
+
+            <h3>Fields</h3>
+            <ul>
+                <li><code>_scriptOptions</code> - Holds script options used for script evaluation.</li>
+                <li><code>_globals</code> - An instance of the <code>ScriptGlobals</code> class, used for handling script interactions.</li>
+            </ul>
+
+            <h3>Methods</h3>
+            <ul>
+                <li><code>ContainsMaliciousUrls(string code)</code> - Checks for forbidden URLs in the script.</li>
+                <li><code>ExecuteScriptAsync(string code)</code> - Executes a script asynchronously, checking for malicious content first.</li>
+                <li><code>UnloadScript()</code> - Resets the script context for reloading.</li>
+            </ul>
+
+            <h3>Forbidden URLs</h3>
+            <p>The following URLs are considered unsafe and are blocked in the script:</p>
+            <ul>
+                <li><code>grabify.link</code></li>
+                <li><code>bit.ly</code></li>
+                <li><code>tinyurl.com</code></li>
+                <li><code>malicioussite.com</code></li>
+            </ul>
+        </div>
+
+        <div class="section" id="example-usage">
+            <h2>Example Usage</h2>
+            <pre>
+                // Example of executing a script using ScriptHooker
+                var scriptHooker = new ScriptHooker();
+
+                string scriptCode = "Console.WriteLine('Hello, world!');";
+                var result = await scriptHooker.ExecuteScriptAsync(scriptCode);
+                Console.WriteLine(result);
+            </pre>
+        </div>
+
+        <div class="section" id="additional-examples">
+            <h2>Additional Examples</h2>
+
+            <h3>Example 1: IP and Domain Information Fetcher</h3>
+            <p>This example demonstrates a Windows Form that allows users to input an IP address or domain name and fetch detailed information such as location, organization, and hostname.</p>
+            <pre>
+                async Task GetIpInfoAsync(string ipAddress, Label labelInfo)
+                {
+                    try
+                    {
+                        using (var httpClient = new HttpClient())
+                        {
+                            string url = $"https://ipinfo.io/{ipAddress}/json";
+                            var response = await httpClient.GetStringAsync(url);
+                            var ipInfo = JsonConvert.DeserializeObject<dynamic>(response);
+                            labelInfo.Text = $"IP Address: {ipInfo.ip}\nLocation: {ipInfo.city}, {ipInfo.region}, {ipInfo.country}\n" +
+                                             $"Organization: {ipInfo.org}\nHostname: {ipInfo.hostname}";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogWarning($"Error fetching IP information: {ex.Message}");
+                        labelInfo.Text = "Error fetching IP information.";
+                    }
+                }
+            </pre>
+
+            <h3>Example 2: Preset Editor</h3>
+            <p>This example shows a Windows Form that allows the user to save a preset with horizontal and vertical values. The preset is stored as a JSON file.</p>
+            <pre>
+                var presetData = new
+                {
+                    Name = name,
+                    Horizontal = horizontal,
+                    Vertical = vertical
+                };
+                string presetFilePath = Path.Combine(presetDir, $"{name}.json");
+                string jsonData = JsonConvert.SerializeObject(presetData, Formatting.Indented);
+                File.WriteAllText(presetFilePath, jsonData);
+            </pre>
+        </div>
+
+        <div class="section" id="logging">
+            <h2>Logging</h2>
+            <p>The <code>ScriptGlobals</code> class provides logging functionality to capture various levels of information:</p>
+            <ul>
+                <li><code>LogMessage(string message)</code> - Logs a general message.</li>
+                <li><code>LogWarning(string message)</code> - Logs a warning message.</li>
+                <li><code>LogError(string message)</code> - Logs an error message.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
