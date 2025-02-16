@@ -22,3 +22,5 @@ Contributions are welcome! ✨ If you have suggestions 💡 or improvements 🛠
 
 👑 **Acknowledgments** 👑
 Special thanks to MaestroDelFuego for the C6 scripting API (https://github.com/MaestroDelFuego/C6-Scripting-Engine), which was instrumental in the development of this macro.
+
+https://discord.gg/SYgkur4Fp7
