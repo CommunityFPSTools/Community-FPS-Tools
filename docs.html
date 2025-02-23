@@ -129,6 +129,25 @@
         .toc a:hover {
             text-decoration: underline;
         }
+
+        /* Safety content bar styling */
+        .safety-bar {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .safety-bar h3 {
+            font-size: 1.4em;
+            margin-top: 0;
+        }
+
+        .safety-bar p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -145,6 +164,7 @@
                 <li><a href="#example-usage">Example Usage</a></li>
                 <li><a href="#additional-examples">Additional Examples</a></li>
                 <li><a href="#logging">Logging</a></li>
+                <li><a href="#safety">Safety</a></li>
             </ul>
         </div>
 
@@ -204,6 +224,15 @@
                 <li><code>tinyurl.com</code></li>
                 <li><code>malicioussite.com</code></li>
             </ul>
+            <div class="section" id="safety">
+                <div class="safety-bar">
+                    <h3>Safety Guidelines</h3>
+                    <p>The script enforces strict checks against malicious content, including disallowed URLs that could be used for harmful activities. Ensure that any custom code or external links adhere to the security policies outlined in the <code>Forbidden URLs</code> section above.</p>
+                </div>
+    
+                <h3>Why Check for Malicious URLs?</h3>
+                <p>By blocking potentially harmful URLs, the system helps mitigate the risk of phishing, data theft, and unauthorized access to user data or devices. Always prioritize security in your scripts to maintain the integrity of the execution environment.</p>
+            </div>
         </div>
 
         <div class="section" id="example-usage">
@@ -221,42 +250,38 @@
         <div class="section" id="additional-examples">
             <h2>Additional Examples</h2>
 
-            <h3>Example 1: IP and Domain Information Fetcher</h3>
-            <p>This example demonstrates a Windows Form that allows users to input an IP address or domain name and fetch detailed information such as location, organization, and hostname.</p>
+            <h3>Example: Template Form</h3>
+            <p>This example demonstrates how to create a basic Windows Form template that can be customized and expanded for specific use cases, such as taking user input or displaying information.</p>
             <pre>
-                async Task GetIpInfoAsync(string ipAddress, Label labelInfo)
-                {
-                    try
-                    {
-                        using (var httpClient = new HttpClient())
-                        {
-                            string url = $"https://ipinfo.io/{ipAddress}/json";
-                            var response = await httpClient.GetStringAsync(url);
-                            var ipInfo = JsonConvert.DeserializeObject<dynamic>(response);
-                            labelInfo.Text = $"IP Address: {ipInfo.ip}\nLocation: {ipInfo.city}, {ipInfo.region}, {ipInfo.country}\n" +
-                                             $"Organization: {ipInfo.org}\nHostname: {ipInfo.hostname}";
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        LogWarning($"Error fetching IP information: {ex.Message}");
-                        labelInfo.Text = "Error fetching IP information.";
-                    }
-                }
-            </pre>
+                // Create the form with custom title
+                var templateform = CreateForm("Template Form");
 
-            <h3>Example 2: Preset Editor</h3>
-            <p>This example shows a Windows Form that allows the user to save a preset with horizontal and vertical values. The preset is stored as a JSON file.</p>
-            <pre>
-                var presetData = new
+                // Add a label
+                var labelMessage = new Label
                 {
-                    Name = name,
-                    Horizontal = horizontal,
-                    Vertical = vertical
+                    Text = "Welcome to the template form!",
+                    Dock = DockStyle.Top
                 };
-                string presetFilePath = Path.Combine(presetDir, $"{name}.json");
-                string jsonData = JsonConvert.SerializeObject(presetData, Formatting.Indented);
-                File.WriteAllText(presetFilePath, jsonData);
+
+                // Add button to trigger action
+                var buttonAction = new Button
+                {
+                    Text = "Click Me",
+                    Dock = DockStyle.Top
+                };
+
+                // Add click event for button
+                buttonAction.Click += (s, e) =>
+                {
+                    MessageBox.Show("Button clicked!");
+                };
+
+                // Add controls to form
+                templateform.Controls.Add(labelMessage);
+                templateform.Controls.Add(buttonAction);
+
+                // Show the input form
+                ShowForm(templateform);
             </pre>
         </div>
 
@@ -269,6 +294,8 @@
                 <li><code>LogError(string message)</code> - Logs an error message.</li>
             </ul>
         </div>
+
+
     </div>
 
 </body>
